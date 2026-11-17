@@ -1,0 +1,32 @@
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+/key/
+/.gplay/
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+credentials*.json
+service-account*.json
+
+# Dependencies, generated output, and caches
+node_modules/
+dist/
+build/
+.cache/
+.wrangler/
+coverage/
+*.log
+
+# Editor and operating system files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.tmp

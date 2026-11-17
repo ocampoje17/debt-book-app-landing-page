@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Debt Book Z: Private and accurate debt ledger</title>
+  <meta name="description" content="Offline personal debt management app. Stored on your device, no account needed, accurate calculations.">
+  <link rel="icon" type="image/png" href="./assets/favicon.png">
+
+  <!-- Content Security Policy -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; script-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self';">
+
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar-wrapper">
+    <nav class="navbar" aria-label="Điều hướng chính">
+      <a href="#" class="brand">
+        <img src="./assets/icon-192.png" alt="Debt Book Z Logo" class="brand-icon">
+        <span>Debt Book Z</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#tinh-nang" class="nav-link" data-i18n="nav.features">Features</a></li>
+        <li><a href="#xem-truoc" class="nav-link" data-i18n="nav.preview">Preview</a></li>
+        <li><a href="#tinh-lai-suat" class="nav-link" data-i18n="nav.calculator">Loan Calculator</a></li>
+        <li><a href="privacy.html" class="nav-link" data-i18n="nav.privacy">Privacy</a></li>
+        <li><a href="terms.html" class="nav-link" data-i18n="nav.terms">Terms</a></li>
+        <li><a href="#hoi-dap" class="nav-link" data-i18n="nav.faq">FAQ</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- Language Selector -->
+        <div class="lang-picker-wrap">
+          <button id="lang-btn" class="lang-btn" aria-label="Chọn ngôn ngữ" aria-haspopup="true">
+            <span id="lang-flag">🇺🇸</span>
+            <span id="lang-name">English</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div id="lang-dropdown" class="lang-dropdown" role="menu"></div>
+        </div>
+
+        <!-- Dark / Light Theme Toggle -->
+        <button id="theme-toggle" class="btn-icon" aria-label="Đổi giao diện sáng tối">
+          <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <a href="#tai-ung-dung" class="btn btn-primary btn-sm nav-cta-btn" data-i18n="nav.download">Download</a>
+
+        <!-- Mobile 3-bar Hamburger Menu Button -->
+        <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Mở menu điều hướng" aria-haspopup="true">
+          <svg width="22" height="22" viewBox="0 0 512 512" fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="38">
+            <line x1="88" y1="152" x2="424" y2="152"></line>
+            <line x1="88" y1="256" x2="424" y2="256"></line>
+            <line x1="88" y1="360" x2="424" y2="360"></line>
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Mobile Drawer Backdrop -->
+  <div id="mobile-drawer-backdrop" class="drawer-backdrop" aria-hidden="true"></div>
+
+  <!-- Mobile Sidebar Drawer (Offcanvas Menu) -->
+  <aside id="mobile-drawer" class="drawer" aria-label="Menu điều hướng di động">
+    <div class="drawer-header">
+      <a href="#" class="brand">
+        <img src="./assets/icon-192.png" alt="Debt Book Z Logo" class="brand-icon">
+        <span>Debt Book Z</span>
+      </a>
+      <button id="drawer-close-btn" class="btn-icon" aria-label="Đóng menu">
+        <svg width="22" height="22" viewBox="0 0 512 512" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="38">
+          <line x1="368" y1="368" x2="144" y2="144"></line>
+          <line x1="368" y1="144" x2="144" y2="368"></line>
+        </svg>
+      </button>
+    </div>
+
+    <ul class="drawer-nav-list">
+      <li><a href="#tinh-nang" class="drawer-nav-link" data-i18n="nav.features">Features</a></li>
+      <li><a href="#xem-truoc" class="drawer-nav-link" data-i18n="nav.preview">Preview</a></li>
+      <li><a href="#tinh-lai-suat" class="drawer-nav-link" data-i18n="nav.calculator">Loan Calculator</a></li>
+      <li><a href="privacy.html" class="drawer-nav-link" data-i18n="nav.privacy">Privacy</a></li>
+      <li><a href="terms.html" class="drawer-nav-link" data-i18n="nav.terms">Terms</a></li>
+      <li><a href="#hoi-dap" class="drawer-nav-link" data-i18n="nav.faq">FAQ</a></li>
+    </ul>
+
+    <div class="drawer-footer">
+      <a href="#tai-ung-dung" class="btn btn-primary" style="width: 100%; justify-content: center;" data-i18n="nav.download">Download</a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section class="hero container">
+      <div class="hero-grid">
+        <div class="hero-text">
+          <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            <span data-i18n="hero.badge">Stored privately on this device</span>
+          </div>
+          <h1 class="hero-title" id="hero-main-title">Clear debt records, total <span class="hero-highlight-word">privacy</span></h1>
+          <p class="hero-desc" data-i18n="hero.desc">All your lent and borrowed records stay on your phone, calculated accurately without sending data to external servers.</p>
+
+          <div class="hero-cta">
+            <a href="#tai-ung-dung" class="btn btn-primary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span data-i18n="hero.ctaDownload">Download APK</span>
+            </a>
+            <a href="#xem-truoc" class="btn btn-secondary" data-i18n="hero.ctaPreview">Explore App Interface</a>
+          </div>
+
+          <div class="hero-trust">
+            <div class="trust-item">
+              <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <span data-i18n="hero.trustNoTrack">No user tracking</span>
+            </div>
+            <div class="trust-item">
+              <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+                <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path>
+                <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path>
+                <path d="M10.71 5.05A16 16 0 0 1 22.58 9"></path>
+                <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path>
+                <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+                <line x1="12" y1="20" x2="12.01" y2="20"></line>
+              </svg>
+              <span data-i18n="hero.trustOffline">Works fully offline</span>
+            </div>
+            <div class="trust-item">
+              <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              <span data-i18n="hero.trustAccurate">Accurate schedule calculation</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phone Mockup Preview -->
+        <div class="mockup-wrapper" id="xem-truoc">
+          <div>
+            <div class="phone-case">
+              <div class="phone-island"></div>
+              <div class="phone-screen">
+                <!-- Status bar -->
+                <div class="phone-status-bar">
+                  <span>09:41</span>
+                  <div style="display:flex; gap:4px; align-items:center;">
+                    <span>5G</span>
+                    <span>100%</span>
+                  </div>
+                </div>
+
+                <!-- Dynamic Screen Body -->
+                <div class="phone-content" id="phone-screen-content">
+                  <!-- Rendered dynamically by main.js based on language and screen -->
+                </div>
+
+                <!-- Floating Bottom App Navigation -->
+                <div class="phone-navbar" aria-label="Thanh điều hướng trong app">
+                  <button class="phone-nav-btn active" data-nav="overview">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="3" y="3" width="7" height="7"></rect>
+                      <rect x="14" y="3" width="7" height="7"></rect>
+                      <rect x="14" y="14" width="7" height="7"></rect>
+                      <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                    <span data-i18n="mockup.nav.overview">Overview</span>
+                  </button>
+                  <button class="phone-nav-btn" data-nav="debts">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                      <polyline points="14 2 14 8 20 8"></polyline>
+                      <line x1="16" y1="13" x2="8" y2="13"></line>
+                      <line x1="16" y1="17" x2="8" y2="17"></line>
+                    </svg>
+                    <span data-i18n="mockup.nav.debts">Debts</span>
+                  </button>
+                  <button class="phone-nav-btn" data-nav="banking">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+                      <line x1="2" y1="10" x2="22" y2="10"></line>
+                    </svg>
+                    <span data-i18n="mockup.nav.banking">Banking</span>
+                  </button>
+                  <button class="phone-nav-btn" data-nav="analysis">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <line x1="18" y1="20" x2="18" y2="10"></line>
+                      <line x1="12" y1="20" x2="12" y2="4"></line>
+                      <line x1="6" y1="20" x2="6" y2="14"></line>
+                    </svg>
+                    <span data-i18n="mockup.nav.analysis">Analysis</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Screen Selector Tabs -->
+            <div class="mockup-controls">
+              <button class="mockup-tab-btn active" data-target="overview" data-i18n="mockup.tabs.overview">1. Overview</button>
+              <button class="mockup-tab-btn" data-target="debts" data-i18n="mockup.tabs.debts">2. Debts</button>
+              <button class="mockup-tab-btn" data-target="banking" data-i18n="mockup.tabs.banking">3. Banking</button>
+              <button class="mockup-tab-btn" data-target="analysis" data-i18n="mockup.tabs.analysis">4. Analysis</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Features Section -->
+    <section class="section container" id="tinh-nang">
+      <div class="section-header">
+        <span class="section-badge" data-i18n="features.badge">Features</span>
+        <h2 class="section-title" data-i18n="features.title">Everyday debt records and repayments</h2>
+        <p class="section-subtitle" data-i18n="features.subtitle">Essential tools to record personal loans and track payment schedules.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card highlight-card">
+          <div class="feature-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <h3 class="feature-title" data-i18n="features.f1Title">Local storage</h3>
+          <p class="feature-desc" data-i18n="features.f1Desc">All debt records and contact names are saved strictly in your phone's memory, never sent to remote servers.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="17 1 21 5 17 9"></polyline>
+              <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+              <polyline points="7 23 3 19 7 15"></polyline>
+              <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+            </svg>
+          </div>
+          <h3 class="feature-title" data-i18n="features.f2Title">Two-way clarity</h3>
+          <p class="feature-desc" data-i18n="features.f2Desc">Strictly separates money owed to you from money you owe, ensuring your net balance is always clear.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+              <path d="M7 15h0M2 9.5h20"></path>
+            </svg>
+          </div>
+          <h3 class="feature-title" data-i18n="features.f3Title">Installment tracking</h3>
+          <p class="feature-desc" data-i18n="features.f3Desc">Automatically reduces principal after each payment, keeps detailed transaction history, and updates debt status.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="1" x2="12" y2="23"></line>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+          </div>
+          <h3 class="feature-title" data-i18n="features.f4Title">Bank loan estimations</h3>
+          <p class="feature-desc" data-i18n="features.f4Desc">Calculates equal installment and declining balance loan schedules, helping you compare different bank options.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 14 14"></polyline>
+            </svg>
+          </div>
+          <h3 class="feature-title" data-i18n="features.f5Title">Due date alerts</h3>
+          <p class="feature-desc" data-i18n="features.f5Desc">Shows upcoming and overdue debts directly on the main screen so you can plan your expenses ahead of time.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17 8 12 3 7 8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+          </div>
+          <h3 class="feature-title" data-i18n="features.f6Title">File backups</h3>
+          <p class="feature-desc" data-i18n="features.f6Desc">Export all your records into a single local file. When switching devices, simply import this file to restore.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Loan Calculator Section -->
+    <section class="section container" id="tinh-lai-suat">
+      <div class="section-header">
+        <span class="section-badge" data-i18n="calculator.badge">Interest Calculator</span>
+        <h2 class="section-title" data-i18n="calculator.title">Estimate your monthly loan installments</h2>
+        <p class="section-subtitle" data-i18n="calculator.subtitle">Enter the principal and interest rate to see estimated monthly payments based on standard banking formulas.</p>
+      </div>
+
+      <div class="calculator-section">
+        <div class="calc-grid">
+          <div class="calc-form">
+            <div class="form-group">
+              <label class="form-label" for="calc-amount" data-i18n="calculator.amountLabel">Loan amount</label>
+              <div class="form-input-wrap">
+                <input type="number" id="calc-amount" class="form-input tabular-nums" value="10000" step="1000" min="100">
+                <span class="form-suffix" id="calc-amount-suffix">USD</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="calc-rate" data-i18n="calculator.rateLabel">Interest rate (% / year)</label>
+              <div class="form-input-wrap">
+                <input type="number" id="calc-rate" class="form-input tabular-nums" value="8.5" step="0.1" min="0" max="50">
+                <span class="form-suffix">%</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="calc-term" data-i18n="calculator.termLabel">Loan term (months)</label>
+              <div class="form-input-wrap">
+                <input type="number" id="calc-term" class="form-input tabular-nums" value="12" step="6" min="1" max="360">
+                <span class="form-suffix" data-i18n="calculator.termSuffix">months</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" data-i18n="calculator.methodLabel">Repayment method</label>
+              <div class="calc-method-toggle">
+                <button type="button" class="method-btn active" data-method="annuity" data-i18n="calculator.methodAnnuity">Equal installments</button>
+                <button type="button" class="method-btn" data-method="declining" data-i18n="calculator.methodDeclining">Declining balance</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-result-box">
+            <div class="result-main">
+              <div class="result-main-label" data-i18n="calculator.resultMonthlyLabel">Monthly payment</div>
+              <div class="result-main-value tabular-nums" id="calc-result-monthly">$872</div>
+            </div>
+
+            <div class="result-stats-row">
+              <div class="result-stat-item">
+                <div class="result-stat-label" data-i18n="calculator.resultInterestLabel">Total interest</div>
+                <div class="result-stat-value tabular-nums" id="calc-result-interest">$467</div>
+              </div>
+              <div class="result-stat-item">
+                <div class="result-stat-label" data-i18n="calculator.resultTotalLabel">Total principal & interest</div>
+                <div class="result-stat-value tabular-nums" id="calc-result-total">$10,467</div>
+              </div>
+            </div>
+
+            <p class="result-hint" data-i18n="calculator.hint">Debt Book Z lets you save these loan scenarios to compare them side by side and track actual progress.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Security & Privacy Section -->
+    <section class="section container" id="rieng-tu">
+      <div class="privacy-callout-card">
+        <div class="privacy-callout-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+        </div>
+        <span class="section-badge" data-i18n="privacy.badge">Security</span>
+        <h2 class="privacy-callout-title" data-i18n="privacy.title">Your financial records stay only on this device</h2>
+        <p class="privacy-callout-desc" data-i18n="privacy.subtitle">Debt Book Z operates with zero cloud servers, zero contact scraping, and zero account sign-up requirements.</p>
+        <div class="privacy-callout-actions">
+          <a href="privacy.html" class="btn btn-secondary">
+            <span data-i18n="privacy.viewFull">Read the complete Privacy Policy</span> &rarr;
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section container" id="hoi-dap">
+      <div class="section-header">
+        <span class="section-badge" data-i18n="faq.badge">FAQ</span>
+        <h2 class="section-title" data-i18n="faq.title">Frequently asked questions</h2>
+        <p class="section-subtitle" data-i18n="faq.subtitle">Helpful details to know before installing.</p>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item active">
+          <button class="faq-question">
+            <span data-i18n="faq.q1">Does the app require an internet connection?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer" style="max-height: 200px; padding-bottom: 20px;" data-i18n="faq.a1">No. Debt Book Z works smoothly in airplane mode. All ledger records, calculations, and analytics run locally.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span data-i18n="faq.q2">Does the app send debt collection messages to others?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer" data-i18n="faq.a2">No. This is strictly your private notepad. It will never send SMS, make calls, or contact your borrowers.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span data-i18n="faq.q3">How do I move my records when getting a new phone?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer" data-i18n="faq.a3">In Settings, choose 'Export backup'. Transfer that file to your new device and tap 'Restore backup'.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span data-i18n="faq.q4">Which currencies are supported?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer" data-i18n="faq.a4">Supports USD, EUR, VND, JPY, GBP, and many others. Each entry can use its own currency without conflict.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span data-i18n="faq.q5">Are there any ads or subscription fees?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer" data-i18n="faq.a5">Debt Book Z has no advertisements and no paywalls for its features.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Download CTA Section -->
+    <section class="section container" id="tai-ung-dung">
+      <div class="cta-banner">
+        <h2 class="cta-title" data-i18n="cta.title">Download Debt Book Z</h2>
+        <p class="cta-desc" data-i18n="cta.desc">Install the APK directly on Android 8.0 and above to start recording immediately without signing up.</p>
+
+        <div class="cta-actions">
+          <a href="#" class="btn btn-primary" onclick="alert(TRANSLATIONS[currentLang]?.cta?.apkAlert || 'Bản cài đặt APK sẽ được cung cấp khi phát hành chính thức.'); return false;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span data-i18n="cta.btnApk">Download APK (Android)</span>
+          </a>
+        </div>
+
+        <div class="cta-note" data-i18n="cta.note">Compatible with Android 8.0 and above. No root permissions or third-party services required.</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand-wrap">
+        <div class="footer-brand">
+          <img src="./assets/favicon.png" alt="Icon" width="20" height="20">
+          <span>Debt Book Z</span>
+        </div>
+        <span class="footer-tagline" data-i18n="footer.tagline">Private, accurate, and offline debt bookkeeping.</span>
+      </div>
+
+      <div class="footer-contact">
+        <a href="mailto:namqhong@gmail.com" class="footer-contact-link" aria-label="Email">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+          </svg>
+          <span>namqhong@gmail.com</span>
+        </a>
+        <a href="https://t.me/namhnz" target="_blank" rel="noopener noreferrer" class="footer-contact-link" aria-label="Telegram">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21.5 2 2 9.5l7 3 2.5 7.5L15 15l6.5 6.5L21.5 2z"></path>
+            <path d="m9 12.5 6-4.5"></path>
+          </svg>
+          <span>@namhnz</span>
+        </a>
+      </div>
+
+      <ul class="footer-links">
+        <li><a href="#tinh-nang" class="footer-link" data-i18n="nav.features">Features</a></li>
+        <li><a href="privacy.html" class="footer-link" data-i18n="footer.privacy">Privacy Policy</a></li>
+        <li><a href="terms.html" class="footer-link" data-i18n="footer.terms">Terms of Service</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="./js/translations.js"></script>
+  <script src="./js/main.js"></script>
+</body>
+</html>

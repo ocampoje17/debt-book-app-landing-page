@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="termsPage.title">Terms of Service</title>
+  <meta name="description" content="Terms of Service for Debt Book Z. Information on offline usage scope, data responsibility, and financial disclaimers.">
+  <link rel="icon" type="image/png" href="./assets/favicon.png">
+
+  <!-- Content Security Policy -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; script-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self';">
+
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar-wrapper">
+    <nav class="navbar" aria-label="Điều hướng">
+      <a href="index.html" class="brand">
+        <img src="./assets/icon-192.png" alt="Debt Book Z Logo" class="brand-icon">
+        <span>Debt Book Z</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html#tinh-nang" class="nav-link" data-i18n="nav.features">Features</a></li>
+        <li><a href="index.html#xem-truoc" class="nav-link" data-i18n="nav.preview">Preview</a></li>
+        <li><a href="index.html#tinh-lai-suat" class="nav-link" data-i18n="nav.calculator">Loan Calculator</a></li>
+        <li><a href="privacy.html" class="nav-link" data-i18n="nav.privacy">Privacy</a></li>
+        <li><a href="terms.html" class="nav-link active" data-i18n="nav.terms">Terms</a></li>
+        <li><a href="index.html#hoi-dap" class="nav-link" data-i18n="nav.faq">FAQ</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- Language Selector -->
+        <div class="lang-picker-wrap">
+          <button id="lang-btn" class="lang-btn" aria-label="Chọn ngôn ngữ" aria-haspopup="true">
+            <span id="lang-flag">🇺🇸</span>
+            <span id="lang-name">English</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div id="lang-dropdown" class="lang-dropdown" role="menu"></div>
+        </div>
+
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" class="btn-icon" aria-label="Đổi giao diện sáng tối">
+          <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <a href="index.html#tai-ung-dung" class="btn btn-primary btn-sm nav-cta-btn" data-i18n="nav.download">Download</a>
+
+        <!-- Mobile 3-bar Hamburger Menu Button -->
+        <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Mở menu điều hướng" aria-haspopup="true">
+          <svg width="22" height="22" viewBox="0 0 512 512" fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="38">
+            <line x1="88" y1="152" x2="424" y2="152"></line>
+            <line x1="88" y1="256" x2="424" y2="256"></line>
+            <line x1="88" y1="360" x2="424" y2="360"></line>
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Mobile Drawer Backdrop -->
+  <div id="mobile-drawer-backdrop" class="drawer-backdrop" aria-hidden="true"></div>
+
+  <!-- Mobile Sidebar Drawer (Offcanvas Menu) -->
+  <aside id="mobile-drawer" class="drawer" aria-label="Menu điều hướng di động">
+    <div class="drawer-header">
+      <a href="index.html" class="brand">
+        <img src="./assets/icon-192.png" alt="Debt Book Z Logo" class="brand-icon">
+        <span>Debt Book Z</span>
+      </a>
+      <button id="drawer-close-btn" class="btn-icon" aria-label="Đóng menu">
+        <svg width="22" height="22" viewBox="0 0 512 512" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="38">
+          <line x1="368" y1="368" x2="144" y2="144"></line>
+          <line x1="368" y1="144" x2="144" y2="368"></line>
+        </svg>
+      </button>
+    </div>
+
+    <ul class="drawer-nav-list">
+      <li><a href="index.html#tinh-nang" class="drawer-nav-link" data-i18n="nav.features">Features</a></li>
+      <li><a href="index.html#xem-truoc" class="drawer-nav-link" data-i18n="nav.preview">Preview</a></li>
+      <li><a href="index.html#tinh-lai-suat" class="drawer-nav-link" data-i18n="nav.calculator">Loan Calculator</a></li>
+      <li><a href="privacy.html" class="drawer-nav-link" data-i18n="nav.privacy">Privacy</a></li>
+      <li><a href="terms.html" class="drawer-nav-link" data-i18n="nav.terms">Terms</a></li>
+      <li><a href="index.html#hoi-dap" class="drawer-nav-link" data-i18n="nav.faq">FAQ</a></li>
+    </ul>
+
+    <div class="drawer-footer">
+      <a href="index.html#tai-ung-dung" class="btn btn-primary" style="width: 100%; justify-content: center;" data-i18n="nav.download">Download</a>
+    </div>
+  </aside>
+
+  <!-- Legal Document Body -->
+  <main class="doc-page">
+    <div class="container doc-container">
+      <article class="doc-card">
+        <a href="index.html" class="doc-back-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span data-i18n="termsPage.backToHome">Back to Home</span>
+        </a>
+
+        <header class="doc-header">
+          <h1 class="doc-title" data-i18n="termsPage.title">Terms of Service</h1>
+          <div class="doc-meta" data-i18n="termsPage.lastUpdated">Last updated: November 17, 2026</div>
+        </header>
+
+        <section class="doc-section">
+          <h2 data-i18n="termsPage.s1Title">1. Intended Purpose</h2>
+          <p data-i18n="termsPage.s1Desc">Debt Book Z is designed as a personal utility tool to assist individuals in logging everyday debts and estimating loan repayment schedules.</p>
+        </section>
+
+        <section class="doc-section">
+          <h2 data-i18n="termsPage.s2Title">2. Financial and Legal Disclaimer</h2>
+          <p data-i18n="termsPage.s2Desc">The application is not a lender, financial institution, or legal advisor. Formulas and amortization calculations provide informational estimates based on standard conventions; actual terms from financial institutions may vary. Users remain responsible for their financial decisions.</p>
+        </section>
+
+        <section class="doc-section">
+          <h2 data-i18n="termsPage.s3Title">3. Data Retention Responsibility</h2>
+          <p data-i18n="termsPage.s3Desc">Because the application does not store information on remote servers, you are responsible for maintaining periodic file backups. The developer cannot recover records if your device is lost or the application is uninstalled without an existing backup.</p>
+        </section>
+
+        <section class="doc-section">
+          <h2 data-i18n="termsPage.s4Title">4. Intellectual Property</h2>
+          <p data-i18n="termsPage.s4Desc">All user interface designs, trademarks, logos, and accompanying documentation related to Debt Book Z remain the intellectual property of the author.</p>
+        </section>
+
+        <section class="doc-section">
+          <h2 data-i18n="termsPage.s5Title">5. Adjustments to Terms</h2>
+          <p data-i18n="termsPage.s5Desc">These terms may be updated alongside future application releases. Continued use of the application indicates your acceptance of updated terms.</p>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand-wrap">
+        <div class="footer-brand">
+          <img src="./assets/favicon.png" alt="Icon" width="20" height="20">
+          <span>Debt Book Z</span>
+        </div>
+        <span class="footer-tagline" data-i18n="footer.tagline">Private, accurate, and offline debt bookkeeping.</span>
+      </div>
+
+      <div class="footer-contact">
+        <a href="mailto:namqhong@gmail.com" class="footer-contact-link" aria-label="Email">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+          </svg>
+          <span>namqhong@gmail.com</span>
+        </a>
+        <a href="https://t.me/namhnz" target="_blank" rel="noopener noreferrer" class="footer-contact-link" aria-label="Telegram">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21.5 2 2 9.5l7 3 2.5 7.5L15 15l6.5 6.5L21.5 2z"></path>
+            <path d="m9 12.5 6-4.5"></path>
+          </svg>
+          <span>@namhnz</span>
+        </a>
+      </div>
+
+      <ul class="footer-links">
+        <li><a href="index.html#tinh-nang" class="footer-link" data-i18n="nav.features">Features</a></li>
+        <li><a href="privacy.html" class="footer-link" data-i18n="footer.privacy">Privacy Policy</a></li>
+        <li><a href="terms.html" class="footer-link" data-i18n="footer.terms">Terms of Service</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="./js/translations.js"></script>
+  <script src="./js/main.js"></script>
+</body>
+</html>
